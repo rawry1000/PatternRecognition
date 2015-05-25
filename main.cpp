@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 //Author: Caiden Sacks
 
@@ -7,14 +8,13 @@ void additionTest();
 void subtractionTest();
 void multiplicationTest();
 void divisionTest();
+void powerTest();
 bool Again();
 
 double num1, num2, num3, num4, num5;
 double rule;
-bool addRule;
-bool subRule;
-bool multRule;
-bool divRule;
+bool addRule, subRule, multRule, divRule, powRule;
+
 char contVar;
 
 int main()
@@ -30,12 +30,12 @@ void additionTest()
 	addTest2 = num3 - num2;
 	addTest3 = num4 - num3;
 	addTest4 = num5 - num4;
+	double* addend = &addTest1;
 
 	if (addTest1 == addTest2 && addTest2 == addTest3 && addTest3 == addTest4)
 	{
-		rule = addTest1;
 		addRule = true;
-		cout << "The rule for the numbers you entered is y = x + " << rule << endl;
+		cout << "The rule for the numbers you entered is y = x + " << *addend << endl;
 	}
 	else
 		addRule = false;
@@ -49,12 +49,12 @@ void subtractionTest()
 		subTest2 = num2 - num3;
 		subTest3 = num3 - num4;
 		subTest4 = num4 - num5;
+		double* subtrahend = &subTest1;
 
 		if (subTest1 == subTest2 && subTest2 == subTest3 && subTest3 == subTest4)
 		{
-			rule = subTest1;
 			subRule = true;
-			cout << "The rule for the numbers you entered is y = x - " << rule << endl;
+			cout << "The rule for the numbers you entered is y = x - " << *subtrahend << endl;
 		}
 		else
 			subRule = false;
@@ -68,13 +68,12 @@ void multiplicationTest()
 	multTest2 = num3 / num2;
 	multTest3 = num4 / num3;
 	multTest4 = num5 / num4;
-
+	double* factor = &multTest1;
 
 	if (multTest1 == multTest2 && multTest2 == multTest3 && multTest3 == multTest4)
 	{
-		rule = multTest1;
 		multRule = true;
-		cout << "The rule for the numbers you entered is y = " << rule << "x" << endl;
+		cout << "The rule for the numbers you entered is y = " << *factor << "x" << endl;
 	}
 	else
 		multRule = false;
@@ -88,15 +87,35 @@ void divisionTest()
 	divTest2 = num2 / num3;
 	divTest3 = num3 / num4;
 	divTest4 = num4 / num5;
+	double* divisor = &divTest1;
 
 	if (divTest1 == divTest2 && divTest2 == divTest3 && divTest3 == divTest4)
 	{
-		rule = divTest1;
 		divRule = true;
-		cout << "The rule for the numbers you entered is y = x / " << rule << endl;
+		cout << "The rule for the numbers you entered is y = x / " << *divisor << endl;
 	}
 	else
 		divRule = false;
+}
+
+void powerTest()
+{
+	double powTest1, powTest2, powTest3, powTest4;
+	
+
+	powTest1 = log(num2) / log(num1);
+	powTest2 = log(num3) / log(num2);
+	powTest3 = log(num4) / log(num3);
+	powTest4 = log(num5) / log(num4);
+	double* power = &powTest1;
+
+	if (powTest1 == powTest2 && powTest2 == powTest3 && powTest3 == powTest4)
+	{
+		powRule = true;
+		cout << "The rule for the numbers you entered is y = x ^ " << *power << endl;
+	}
+	else
+		powRule = false;
 }
 
 void allTest()
@@ -113,8 +132,10 @@ void allTest()
 		multiplicationTest();
 
 		divisionTest();
+		
+		powerTest();
 
-		if (addRule != true && subRule != true && multRule != true && divRule != true)
+		if (addRule != true && subRule != true && multRule != true && divRule != true && powRule != true)
 		{
 			cout << "No discernible pattern was found." << endl;
 		}
